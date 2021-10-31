@@ -1,0 +1,24 @@
+.search-details-zone{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+
+    input.city-input{
+        background-color: transparent;
+        outline: none;
+        font-size: 1.5rem;
+        margin: 3rem 0 0 0;
+        padding-bottom: 0.5rem;
+        color: $text-white;
+        border: 0;
+        border-bottom: 1px $text-white solid;
+    }
+
+    input.city-input::placeholder{
+        color: $text-white;
+    }
+
+  
+}

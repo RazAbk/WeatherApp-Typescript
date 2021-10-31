@@ -55,6 +55,5 @@ async function getCitiesNames(searchTxt: string) {
         return citiesMapObj
     } catch(err) {
         console.log('%c Failed to get Cities from API ', 'background: #222; color: #ff0000');
-        throw new Error()
     }
 }
