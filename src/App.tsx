@@ -1,10 +1,17 @@
-import React from 'react';
+import React from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { Route, Switch } from 'react-router'
+import { Favourites } from './pages/Favourites';
+import { WeatherApp } from './pages/WeatherApp';
 
 function App() {
   return (
-    <div className="App">
-      App
-    </div>
+    <Router>
+      <Switch>
+        <Route path = '/favourites' component={Favourites}/>
+        <Route exact path = '/' component={WeatherApp}/>
+      </Switch>
+    </Router>
   );
 }
 
