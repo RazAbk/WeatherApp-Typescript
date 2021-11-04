@@ -16,6 +16,7 @@ export interface ICityProps {
 
 export interface ICurrentWeatherProps {
     EpochTime: string;
+    LocalObservationDateTime: string;
     WeatherText: string;
     WeatherIcon: number;
     IsDayTime: boolean;

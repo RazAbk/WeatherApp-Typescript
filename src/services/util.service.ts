@@ -15,7 +15,7 @@ function debounce<Params extends any[]>(func: (...args: Params) => any, timeout:
 }
 
 function getTime(timeStamp: string): string{
-    const date = new Date(parseInt(timeStamp) * 1000)
+    const date = new Date(timeStamp)
 
     return `${date.getHours()}:${date.getMinutes()} • ${_getDay(date.getDay())} ${date.getDate()} ${_getMonth(date.getMonth())} ${date.getFullYear()}`
 }

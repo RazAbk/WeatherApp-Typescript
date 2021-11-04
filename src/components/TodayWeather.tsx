@@ -23,24 +23,24 @@ export const TodayWeather = ({ city }: { city: ICityProps | null }) => {
     console.log('currentWeather from context', todayWeather)
 
 
-
     if (!city || !todayWeather) return null
 
     return (
         <div className="todays-weather">
             <div className="temp-display">
-                26°
+                {todayWeather.Temperature.Metric.Value.toFixed(0)}°
             </div>
             <div className="city-and-time">
                 <div className="city-name">
                     {city.City}
                 </div>
                 <div className="city-time">
-                    {utilService.getTime(todayWeather.EpochTime)}
+                    {utilService.getTime(todayWeather.LocalObservationDateTime)}
                 </div>
             </div>
             <div className="weather-preview">
-                INFO
+                <img src={`https://www.accuweather.com/images/weathericons/${todayWeather.WeatherIcon}.svg`} alt={todayWeather.WeatherText} />
+                <p>{todayWeather.WeatherText}</p>
             </div>
         </div>
     )

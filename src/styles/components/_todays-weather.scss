@@ -19,4 +19,14 @@
             font-size: 1.2rem;
         }
     }
+
+    .weather-preview{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        img{
+            width: 50px;
+        }
+    }
 }
