@@ -6,10 +6,39 @@ import { SearchResults } from '../components/SearchResults'
 import { TodayWeather } from '../components/TodayWeather'
 import { WeatherDetails } from '../components/WeatherDetails'
 import { cityService } from '../services/city-service'
+import { TodayWeatherContext } from '../components/context/TodayWeatherContext'
+
+export interface ICityProps {
+    Key: string;
+    City: string;
+    Country: string;
+}
+
+export interface ICurrentWeatherProps {
+    EpochTime: string;
+    WeatherText: string;
+    WeatherIcon: number;
+    IsDayTime: boolean;
+    Temperature: {
+        Metric: {
+          Value: number,
+          Unit: string,
+          UnitType: number
+        },
+        Imperial: {
+          Value: number,
+          Unit: string,
+          UnitType: number
+        }
+      }
+}
 
 export const WeatherApp = () => {
 
     const [cities, setCities] = useState([])
+    const [currentCity, setCurrentCity] = useState<ICityProps | null>(null)
+
+    const [todayWeather, setTodayWeather] = useState<any>(null)
 
     const getCities = async (searchTxt: string) => {
         const cities = await cityService.getCitiesNames(searchTxt)
@@ -22,18 +51,21 @@ export const WeatherApp = () => {
 
     return (
         <div className="app">
+            <TodayWeatherContext.Provider value={{todayWeather, setTodayWeather}}>
+
             <div className="main-app">
                 <Header />
                 <div className="weather-details-zone">
-                    <TodayWeather />
-                    <FiveDayForecast />
+                    <TodayWeather city={currentCity} />
+                    <FiveDayForecast  />
                 </div>
             </div>
             <div className="search-details-zone">
                 <CitySearch onSetCitySearch={onSetCitySearch}/>
-                {(cities && cities.length > 0) && <SearchResults cities={cities}/>}
+                <SearchResults cities={cities} setCurrentCity={setCurrentCity}/>
                 <WeatherDetails />
             </div>
+            </TodayWeatherContext.Provider>
         </div>
     )
 }

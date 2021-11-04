@@ -4,7 +4,6 @@
     align-items: center;
 
 
-
     input.city-input{
         background-color: transparent;
         outline: none;
@@ -14,11 +13,20 @@
         color: $text-white;
         border: 0;
         border-bottom: 1px $text-white solid;
-    }
+        width: 80%;
 
+    }
+    
     input.city-input::placeholder{
         color: $text-white;
     }
 
   
+}
+
+.city-search{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }

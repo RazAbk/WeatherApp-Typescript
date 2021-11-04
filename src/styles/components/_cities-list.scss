@@ -1,0 +1,22 @@
+.cities-list{
+    width: 80%;
+
+    transform: translateY(-100%);
+    transition: 0.5s;
+
+    max-height: 40vh;
+    overflow-y: auto; 
+    
+    ul{
+        list-style-type: none;
+    }
+    li{
+        cursor: pointer;
+        padding: 1rem 0;
+        font-size: 1.2rem;
+    }
+}
+
+.show{
+    transform: translateY(0%);
+}

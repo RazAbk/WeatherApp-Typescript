@@ -1,0 +1,22 @@
+.todays-weather{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    .temp-display{
+        font-size: 4rem;
+    }
+
+    .city-and-time{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .city-name{
+            font-size: 1.5rem;
+        }
+        .city-time{
+            font-size: 1.2rem;
+        }
+    }
+}

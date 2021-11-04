@@ -24,8 +24,6 @@ const citiesKey = 'cities'
 async function getCitiesNames(searchTxt: string) {
     const citiesCache: LooseObject = localStorageService.load(citiesKey) || {}
 
-    console.log(citiesCache)
-
     // Fetch Cities from cache (If exist)
     if (citiesCache[searchTxt]) {
         // Todo: Add cache timing mechanism

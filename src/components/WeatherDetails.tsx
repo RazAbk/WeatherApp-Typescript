@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { TodayWeatherContext } from './context/TodayWeatherContext'
 
 export const WeatherDetails = () => {
+
+    const { todayWeather } = useContext(TodayWeatherContext)
+
     return (
-        <div>
-            WeatherDetails
+        <div className="weather-details">
+            <h2>Weather Details</h2>
+            {todayWeather?.WeatherText}
         </div>
     )
 }
