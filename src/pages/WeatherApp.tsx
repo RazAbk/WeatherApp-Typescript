@@ -34,6 +34,36 @@ export interface ICurrentWeatherProps {
       }
 }
 
+export interface IForecastProps {
+        Date: string;
+        EpochDate: number;
+        Temperature: {
+          Minimum: {
+            Value: number,
+            Unit: string,
+            UnitType: number;
+          },
+          Maximum: {
+            Value: number,
+            Unit: string,
+            UnitType: number
+          }
+        },
+        Day: {
+          Icon: number,
+          IconPhrase: string,
+          HasPrecipitation: boolean
+        },
+        Night: {
+          Icon: number,
+          IconPhrase: string,
+          HasPrecipitation: boolean
+        },
+        Sources: string[],
+        MobileLink: string,
+        Link: string
+}
+
 export const WeatherApp = () => {
 
     const [cities, setCities] = useState([])
@@ -58,7 +88,7 @@ export const WeatherApp = () => {
                 <Header />
                 <div className="weather-details-zone">
                     <TodayWeather city={currentCity} />
-                    <FiveDayForecast  />
+                    <FiveDayForecast city={currentCity}  />
                 </div>
             </div>
             <div className="search-details-zone">

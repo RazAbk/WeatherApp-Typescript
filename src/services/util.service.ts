@@ -1,6 +1,7 @@
 export const utilService = {
     debounce,
-    getTime
+    getTime,
+    getDay
 }
 
 function debounce<Params extends any[]>(func: (...args: Params) => any, timeout: number,): (...args: Params) => void {
@@ -18,6 +19,12 @@ function getTime(timeStamp: string): string{
     const date = new Date(timeStamp)
 
     return `${date.getHours()}:${date.getMinutes()} • ${_getDay(date.getDay())} ${date.getDate()} ${_getMonth(date.getMonth())} ${date.getFullYear()}`
+}
+
+function getDay(timeStamp: string): string{
+    const date = new Date(timeStamp)
+
+    return _getDay(date.getDay())
 }
 
 

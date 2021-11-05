@@ -1,0 +1,17 @@
+.five-day-forecast{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    .forecast-day{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+
+        img{
+            width: 50px;
+        }
+    }   
+}
