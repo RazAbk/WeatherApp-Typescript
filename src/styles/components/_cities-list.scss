@@ -4,8 +4,10 @@
     transform: translateY(-100%);
     transition: 0.5s;
 
-    max-height: 40vh;
+    // max-height: 40vh;
     overflow-y: auto; 
+
+    font-family: Roboto-Regular;
     
     ul{
         list-style-type: none;

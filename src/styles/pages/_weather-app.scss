@@ -1,6 +1,13 @@
 .app{
     display: flex;
     justify-content: space-between;
+    color: white;
+
+    img{
+        filter: brightness(200%) saturate(0%) contrast(1000%);
+    }
+
+    font-family: Roboto-Regular;
 }
 
 .main-app{

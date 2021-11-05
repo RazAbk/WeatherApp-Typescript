@@ -4,6 +4,9 @@
     justify-content: space-between;
     gap: 20px;
 
+    width: 70%;
+    max-width: 700px;
+
     .forecast-day{
         display: flex;
         flex-direction: column;

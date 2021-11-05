@@ -27,7 +27,7 @@ export const FiveDayForecast = ({city}: { city: ICityProps | null }) => {
     return (
         <div className="five-day-forecast">
             {foreCast.map(day => {
-                return <div className="forecast-day">
+                return <div key={city.Key+day.EpochDate} className="forecast-day">
                            <h4>{utilService.getDay(day.Date)}</h4>
                            <img src={`https://www.accuweather.com/images/weathericons/${todayWeather.IsDayTime ? day.Day.Icon : day.Night.Icon}.svg`} 
                                 alt={todayWeather.IsDayTime ? day.Day.IconPhrase : day.Night.IconPhrase} />

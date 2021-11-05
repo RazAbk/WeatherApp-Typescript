@@ -94,7 +94,7 @@ export const WeatherApp = () => {
             <div className="search-details-zone">
                 <CitySearch onSetCitySearch={onSetCitySearch}/>
                 <SearchResults cities={cities} setCurrentCity={setCurrentCity}/>
-                <WeatherDetails />
+                {/* <WeatherDetails /> */}
             </div>
             </TodayWeatherContext.Provider>
         </div>
