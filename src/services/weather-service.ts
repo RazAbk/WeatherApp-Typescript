@@ -3,10 +3,7 @@ import { localStorageService } from "./local-storage.service"
 
 export const weatherService = {
     getCurrentWeather,
-    getFiveDayForecast,
-    toggleCityFavorite,
-    isCityFavorite,
-    getFavoriteCities
+    getFiveDayForecast
 }
 
 interface LooseObject {
@@ -17,7 +14,6 @@ interface LooseObject {
 const apiKey = process.env.REACT_APP_WEATHER_API
 const currentWeatherKey = 'currentWeather'
 const forecastKey = 'foreCast'
-const favoriteCitiesKey = 'favoriteCities'
 
 
 async function getCurrentWeather(cityKey: string) {
@@ -77,29 +73,6 @@ async function getFiveDayForecast(cityKey: string) {
     }
 }
 
-function toggleCityFavorite(cityKey: string){
-  const favoriteCities: LooseObject = localStorageService.load(favoriteCitiesKey) || []
-  
-  const idx = favoriteCities.findIndex((key: string): boolean => key === cityKey)
-  
-  if(idx !== -1){
-    favoriteCities.splice(idx,1)
-  } else {
-    favoriteCities.push(cityKey)
-  }
-  
-  localStorageService.save(favoriteCitiesKey, favoriteCities)
-}
-
-function isCityFavorite(cityKey: string) {
-  const favoriteCities: LooseObject = localStorageService.load(favoriteCitiesKey) || []
-
-  return favoriteCities.includes(cityKey)
-}
-
-function getFavoriteCities() {
-  return localStorageService.load(favoriteCitiesKey) || []
-}
 
 // const obj = {
 //     "Headline": {

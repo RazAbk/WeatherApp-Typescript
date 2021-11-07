@@ -4,7 +4,10 @@ import { localStorageService } from "./local-storage.service"
 
 export const cityService = {
     getCitiesNames,
-    getCityByGeolocation
+    getCityByGeolocation,
+    toggleCityFavorite,
+    isCityFavorite,
+    getFavoriteCities
 }
 
 interface ICity {
@@ -22,6 +25,7 @@ interface LooseObject {
 
 const apiKey = process.env.REACT_APP_WEATHER_API
 const citiesKey = 'cities'
+const favoriteCitiesKey = 'favoriteCities'
 
 async function getCitiesNames(searchTxt: string) {
     const citiesCache: LooseObject = localStorageService.load(citiesKey) || {}
@@ -100,3 +104,28 @@ async function getCityByGeolocation({lat, lng}: ICoords = {lat: -1, lng: -1}): P
     }
 
 }
+
+function toggleCityFavorite(city: ICityProps){
+    const favoriteCities: LooseObject = localStorageService.load(favoriteCitiesKey) || []
+    
+    const idx = favoriteCities.findIndex((favCity: ICityProps): boolean => favCity.Key === city.Key)
+    
+    if(idx !== -1){
+      favoriteCities.splice(idx,1)
+    } else {
+      favoriteCities.push(city)
+    }
+    
+    localStorageService.save(favoriteCitiesKey, favoriteCities)
+  }
+  
+  function isCityFavorite(cityKey: string) {
+    const favoriteCities: ICityProps[] = localStorageService.load(favoriteCitiesKey) || []
+  
+    return favoriteCities.some(favCity => favCity.Key === cityKey)
+  }
+  
+  function getFavoriteCities() {
+    return localStorageService.load(favoriteCitiesKey) || []
+  }
+  

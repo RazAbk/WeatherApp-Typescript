@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
+import { ICityProps } from '../components/context/TodayWeatherContext'
+import { FavoriteCityPreview } from '../components/FavoriteCityPreview'
 import { FavoritesHeader } from '../components/FavoritesHeader'
-import { weatherService } from '../services/weather-service'
+import { cityService } from '../services/city-service'
 
 
 export const Favourites = () => {
 
-    const [favoriteCities, setFavoriteCities] = useState<string[]>([])
+    const [favoriteCities, setFavoriteCities] = useState<ICityProps[]>([])
 
     useEffect(() => {
-        const favoriteCities = weatherService.getFavoriteCities()
+        const favoriteCities = cityService.getFavoriteCities()
         setFavoriteCities(favoriteCities)
     }, [])
     
@@ -17,13 +19,7 @@ export const Favourites = () => {
             <div className="main-app">
                 <FavoritesHeader/>
                 <div className="favorite-cities-list">
-                    {favoriteCities.map(city => {
-                        return (
-                            <div className="favorite-city-preview">
-                                preview: {city}
-                            </div>
-                        )
-                    })}
+                    {favoriteCities.map(city => <FavoriteCityPreview key={'favorite-' + city.Key} city={city}/>)}
                 </div>
             </div>
         </div>

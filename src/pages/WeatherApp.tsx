@@ -4,7 +4,6 @@ import { FiveDayForecast } from '../components/FiveDayForecast'
 import { Header } from '../components/Header'
 import { SearchResults } from '../components/SearchResults'
 import { TodayWeather } from '../components/TodayWeather'
-// import { WeatherDetails } from '../components/WeatherDetails'
 import { cityService } from '../services/city-service'
 import { TodayWeatherContext } from '../components/context/TodayWeatherContext' 
 import { Screen } from '../components/Screen'
@@ -94,7 +93,6 @@ export const WeatherApp = () => {
       
       getUserCoords()
 
-
     }, [])
 
     const getCities = async (searchTxt: string) => {
@@ -125,7 +123,6 @@ export const WeatherApp = () => {
             <div className={`search-details-zone ${isMobileMenu ? 'show-menu' : ''}`}>
                 <CitySearch onSetCitySearch={onSetCitySearch}/>
                 <SearchResults cities={cities} setCurrentCity={setCurrentCity} toggleMobileMenu={toggleMobileMenu}/>
-                {/* <WeatherDetails /> */}
             </div>
             </TodayWeatherContext.Provider>
             </div>

@@ -4,6 +4,7 @@ import { utilService } from '../services/util.service'
 import { weatherService } from '../services/weather-service'
 import { TodayWeatherContext, IWeatherContext } from '../components/context/TodayWeatherContext'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
+import { cityService } from '../services/city-service'
 
 
 export const TodayWeather = ({ city }: { city: ICityProps | null }) => {
@@ -18,13 +19,13 @@ export const TodayWeather = ({ city }: { city: ICityProps | null }) => {
         }
         if (city) {
             getCurrentWeather(city.Key)
-            setFavorite(weatherService.isCityFavorite(city.Key))
+            setFavorite(cityService.isCityFavorite(city.Key))
         }
     }, [city, setTodayWeather])
 
     const onToggleFavorite = () => {
         if(city){
-            weatherService.toggleCityFavorite(city.Key)
+            cityService.toggleCityFavorite(city)
             setFavorite(prevState => !prevState)
         }
     }

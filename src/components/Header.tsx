@@ -5,6 +5,7 @@ import { FaHome } from 'react-icons/fa'
 import { IWeatherContext, TodayWeatherContext } from '../components/context/TodayWeatherContext'
 import { weatherService } from '../services/weather-service'
 import { Link } from 'react-router-dom'
+import { cityService } from '../services/city-service'
 
 
 interface IHeaderProps {
@@ -32,7 +33,7 @@ export const Header = ({isMobileMenu, toggleMobileMenu}: IHeaderProps) => {
         window.addEventListener('resize', updateState)
 
         if(currentCity){
-            setFavorite(weatherService.isCityFavorite(currentCity.Key))
+            setFavorite(cityService.isCityFavorite(currentCity.Key))
         }
 
         return () => {
@@ -42,7 +43,7 @@ export const Header = ({isMobileMenu, toggleMobileMenu}: IHeaderProps) => {
 
     const onToggleFavorite = () => {
         if(currentCity){
-            weatherService.toggleCityFavorite(currentCity.Key)
+            cityService.toggleCityFavorite(currentCity)
             setFavorite(prevState => !prevState)
         }
     }

@@ -1,0 +1,54 @@
+.favorite-cities-list{
+    padding: 1.5rem;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    grid-template-rows: repeat(auto-fit, 1fr);
+    place-items: center;
+    gap: 2rem;
+
+    overflow-y: auto;
+    
+    @include for-tablet{
+        gap: 3rem;
+        padding: 3rem;
+        grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+        grid-template-rows: repeat(auto-fit, 1fr);
+    
+    }
+}
+
+.favorite-city-preview{
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.80);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    width: 20rem;
+    border-radius: 20px;
+    padding: 1.2rem;
+    text-align: center;
+
+    .city-name{
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .city-time{
+        font-size: 1.2rem;
+    }
+
+    img{
+        width: 85px;
+    }
+
+    .weather-text{
+        font-size: 1.75rem;
+    }
+
+    .weather-temperature{
+        font-size: 2rem;
+    }
+}
