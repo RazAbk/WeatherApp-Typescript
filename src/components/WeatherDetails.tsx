@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { TodayWeatherContext } from './context/TodayWeatherContext'
+import { TodayWeatherContext } from '../components/context/TodayWeatherContext'
 
 export const WeatherDetails = () => {
 

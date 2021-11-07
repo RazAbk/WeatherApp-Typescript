@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CitySearch } from '../components/CitySearch'
 import { FiveDayForecast } from '../components/FiveDayForecast'
 import { Header } from '../components/Header'
@@ -6,7 +6,7 @@ import { SearchResults } from '../components/SearchResults'
 import { TodayWeather } from '../components/TodayWeather'
 // import { WeatherDetails } from '../components/WeatherDetails'
 import { cityService } from '../services/city-service'
-import { TodayWeatherContext } from '../components/context/TodayWeatherContext'
+import { TodayWeatherContext } from '../components/context/TodayWeatherContext' 
 import { Screen } from '../components/Screen'
 
 export interface ICityProps {
@@ -72,6 +72,31 @@ export const WeatherApp = () => {
     const [todayWeather, setTodayWeather] = useState<any>(null)
     const [isMobileMenu, setMobileMenu] = useState(false)
 
+    useEffect(() => {
+
+      // Get user's current location (lat,lng) => get user's current city by Api
+      // If device/browser doesn't support geolocation, get default location (tel aviv)
+      const getUserCoords = () => {
+        navigator.geolocation.getCurrentPosition( async (geoLocation) => {
+          const userCoords = {
+            lat: geoLocation.coords.latitude,
+            lng: geoLocation.coords.longitude
+          }
+          
+          const city = await cityService.getCityByGeolocation(userCoords)
+          setCurrentCity(city)
+        }, async () => {
+          const city = await cityService.getCityByGeolocation()
+          setCurrentCity(city)
+        })
+
+      }
+      
+      getUserCoords()
+
+
+    }, [])
+
     const getCities = async (searchTxt: string) => {
         const cities = await cityService.getCitiesNames(searchTxt)
         setCities(cities)
@@ -103,7 +128,7 @@ export const WeatherApp = () => {
                 {/* <WeatherDetails /> */}
             </div>
             </TodayWeatherContext.Provider>
-        </div>
+            </div>
         <Screen isOpen={isMobileMenu} exitScreen={toggleMobileMenu}/>
         </>
     )

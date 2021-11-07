@@ -8,7 +8,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path = '/favourites' component={Favourites}/>
+        <Route exact path = '/favorites' component={Favourites}/>
         <Route exact path = '/' component={WeatherApp}/>
       </Switch>
     </Router>

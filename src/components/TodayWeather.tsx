@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { ICityProps } from '../pages/WeatherApp'
 import { utilService } from '../services/util.service'
 import { weatherService } from '../services/weather-service'
-import { TodayWeatherContext, IWeatherContext } from './context/TodayWeatherContext'
+import { TodayWeatherContext, IWeatherContext } from '../components/context/TodayWeatherContext'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 
 

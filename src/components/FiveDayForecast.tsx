@@ -3,7 +3,7 @@ import { ICityProps } from '../pages/WeatherApp'
 import { weatherService } from '../services/weather-service'
 import { IForecastProps } from '../pages/WeatherApp'
 import { utilService } from '../services/util.service'
-import { IWeatherContext, TodayWeatherContext } from './context/TodayWeatherContext'
+import { IWeatherContext, TodayWeatherContext } from '../components/context/TodayWeatherContext'
 
 export const FiveDayForecast = ({city}: { city: ICityProps | null }) => {
 

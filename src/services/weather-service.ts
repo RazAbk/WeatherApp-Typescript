@@ -5,7 +5,8 @@ export const weatherService = {
     getCurrentWeather,
     getFiveDayForecast,
     toggleCityFavorite,
-    isCityFavorite
+    isCityFavorite,
+    getFavoriteCities
 }
 
 interface LooseObject {
@@ -94,6 +95,10 @@ function isCityFavorite(cityKey: string) {
   const favoriteCities: LooseObject = localStorageService.load(favoriteCitiesKey) || []
 
   return favoriteCities.includes(cityKey)
+}
+
+function getFavoriteCities() {
+  return localStorageService.load(favoriteCitiesKey) || []
 }
 
 // const obj = {

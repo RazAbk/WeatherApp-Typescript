@@ -1,8 +1,10 @@
 import axios from "axios"
+import { ICityProps } from "../components/context/TodayWeatherContext" 
 import { localStorageService } from "./local-storage.service"
 
 export const cityService = {
-    getCitiesNames
+    getCitiesNames,
+    getCityByGeolocation
 }
 
 interface ICity {
@@ -54,4 +56,47 @@ async function getCitiesNames(searchTxt: string) {
     } catch(err) {
         console.log('%c Failed to get Cities from API ', 'background: #222; color: #ff0000');
     }
+}
+
+interface ICoords{
+    lat: number;
+    lng: number;
+}
+
+async function getCityByGeolocation({lat, lng}: ICoords = {lat: -1, lng: -1}): Promise<ICityProps> {
+    try{ 
+
+        if(lat === -1 && lng === -1){
+            return Promise.resolve({
+                Key: "215854",
+                City: "Tel Aviv",
+                Country: "Israel"
+            })
+        }
+
+        // const city = await axios.get(`http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${apiKey}&q=${lat}%2C%20${lng}`)
+
+        // console.log('%c Got City from API ', 'background: #222; color: #bada55');
+        // return {
+        //     Key: city.data.Key,
+        //     City: city.data.LocalizedName,
+        //     Country: city.data.Country.LocalizedName
+        // }
+
+
+        return Promise.resolve({
+            Key: "215854",
+            City: "Tel Aviv",
+            Country: "Israel"
+        })
+
+    } catch(err) {
+        console.log('%c Failed to get City from API ', 'background: #222; color: #ff0000');
+        return Promise.resolve({
+            Key: "215854",
+            City: "Tel Aviv",
+            Country: "Israel"
+        })
+    }
+
 }
