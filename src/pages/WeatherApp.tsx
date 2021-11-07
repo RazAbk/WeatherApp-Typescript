@@ -81,8 +81,8 @@ export const WeatherApp = () => {
         getCities(searchTxt)
     }
 
-    const toggleMobileMenu = () => {
-        setMobileMenu(prevState => !prevState)
+    const toggleMobileMenu = (action: boolean) => {
+        setMobileMenu(action)
     }
 
     return (
@@ -91,7 +91,7 @@ export const WeatherApp = () => {
             <TodayWeatherContext.Provider value={{todayWeather, setTodayWeather}}>
 
             <div className="main-app">
-                <Header toggleMobileMenu={toggleMobileMenu}/>
+                <Header isMobileMenu={isMobileMenu} toggleMobileMenu={toggleMobileMenu}/>
                 <div className="weather-details-zone">
                     <TodayWeather city={currentCity} />
                     <FiveDayForecast city={currentCity}  />

@@ -4,10 +4,11 @@ import { AiFillHeart } from 'react-icons/ai'
 import { FaHome } from 'react-icons/fa'
 
 interface IHeaderProps {
-    toggleMobileMenu: () => void
+    isMobileMenu: boolean;
+    toggleMobileMenu: (action: boolean) => void
 }
 
-export const Header = ({toggleMobileMenu}: IHeaderProps) => {
+export const Header = ({isMobileMenu, toggleMobileMenu}: IHeaderProps) => {
 
     const [isMobile, setIsMobile] = useState(window.innerWidth < 850 ? true : false)
 
@@ -54,7 +55,7 @@ export const Header = ({toggleMobileMenu}: IHeaderProps) => {
                 }
             </div>
             <div className="header-menu" style={isMobile ? style.show : style.dontShow}>
-                <GiHamburgerMenu className="mobile-hamburger-btn" onClick={toggleMobileMenu} />
+                <GiHamburgerMenu className="mobile-hamburger-btn" onClick={() => {toggleMobileMenu(!isMobileMenu)}} />
             </div>
         </div>
     )
