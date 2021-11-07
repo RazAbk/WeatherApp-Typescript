@@ -4,7 +4,7 @@ import { ICurrentWeatherProps } from '../pages/WeatherApp'
 import { ICityProps } from './context/TodayWeatherContext'
 import { utilService } from '../services/util.service'
 import { TiDelete } from 'react-icons/ti'
-import { cityService } from '../services/city-service'
+import { useHistory } from 'react-router'
 
 interface IFavoriteCityPreview {
     city: ICityProps;
@@ -14,6 +14,8 @@ interface IFavoriteCityPreview {
 export const FavoriteCityPreview = ({city, removeFromFavorites}: IFavoriteCityPreview) => {
 
     const [cityWeather, setCityWeather] = useState<ICurrentWeatherProps | null>(null)
+    const history = useHistory()
+
 
     useEffect(() => {
         const getCityWeather = async () => {
@@ -24,12 +26,15 @@ export const FavoriteCityPreview = ({city, removeFromFavorites}: IFavoriteCityPr
         getCityWeather()
     }, [city])
 
+    const goToCity = () => {
+        history.push('/city/' + city.Key)
+    }
   
 
     if(!cityWeather) return null
 
     return (
-        <div className="favorite-city-preview">
+        <div className="favorite-city-preview" onClick={goToCity}>
             <div className="remove-from-favorite-btn">
                 <TiDelete onClick={() => {removeFromFavorites(city)}}/>
             </div>

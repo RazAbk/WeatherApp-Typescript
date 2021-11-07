@@ -9,6 +9,7 @@ function App() {
     <Router>
       <Switch>
         <Route exact path = '/favorites' component={Favourites}/>
+        <Route path = '/city/:citykey' component={WeatherApp}/>
         <Route exact path = '/' component={WeatherApp}/>
       </Switch>
     </Router>

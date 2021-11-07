@@ -7,6 +7,8 @@ import { TodayWeather } from '../components/TodayWeather'
 import { cityService } from '../services/city-service'
 import { TodayWeatherContext } from '../components/context/TodayWeatherContext' 
 import { Screen } from '../components/Screen'
+import { useParams } from 'react-router'
+import { weatherService } from '../services/weather-service'
 
 export interface ICityProps {
     Key: string;
@@ -64,6 +66,10 @@ export interface IForecastProps {
         Link: string
 }
 
+interface ICityKeyParams {
+    citykey: string
+}
+
 export const WeatherApp = () => {
 
     const [cities, setCities] = useState<ICityProps[]>([])
@@ -71,6 +77,7 @@ export const WeatherApp = () => {
     const [todayWeather, setTodayWeather] = useState<any>(null)
     const [isMobileMenu, setMobileMenu] = useState(false)
     const inputRef = useRef<HTMLInputElement>(null)
+    const cityKey: ICityKeyParams = useParams()
 
     useEffect(() => {
       // Get user's current location (lat,lng) => get user's current city by Api
@@ -90,8 +97,17 @@ export const WeatherApp = () => {
         })
 
       }
+
+      const getCurrentWeather = async () => {
+        const currentCity = await cityService.getCityByKey(cityKey.citykey)
+        setCurrentCity(currentCity)
+      }
       
-      getUserCoords()
+      if(!cityKey){
+        getUserCoords()
+      } else{
+        getCurrentWeather()
+      }
 
     }, [])
 

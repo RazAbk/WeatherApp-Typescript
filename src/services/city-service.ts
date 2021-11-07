@@ -7,7 +7,8 @@ export const cityService = {
     getCityByGeolocation,
     toggleCityFavorite,
     isCityFavorite,
-    getFavoriteCities
+    getFavoriteCities,
+    getCityByKey
 }
 
 interface ICity {
@@ -18,8 +19,11 @@ interface ICity {
     };
 }
 
-interface LooseObject {
-    [key: string]: any
+interface ICityCache {
+    [key: string]: {
+        createdAt: number,
+        data: ICity[]
+    }
 }
 
 
@@ -28,7 +32,7 @@ const citiesKey = 'cities'
 const favoriteCitiesKey = 'favoriteCities'
 
 async function getCitiesNames(searchTxt: string) {
-    const citiesCache: LooseObject = localStorageService.load(citiesKey) || {}
+    const citiesCache: ICityCache = localStorageService.load(citiesKey) || {}
 
     // Fetch Cities from cache (If exist)
     if (citiesCache[searchTxt]) {
@@ -103,6 +107,26 @@ async function getCityByGeolocation({lat, lng}: ICoords = {lat: -1, lng: -1}): P
         })
     }
 
+}
+
+async function getCityByKey(cityKey: string){
+    const citiesCache = localStorageService.load(citiesKey) || []
+
+    // Try fetching from cache
+    for(const key in citiesCache){
+        const idx = citiesCache[key].data.findIndex((city: ICity) => city.Key === cityKey)
+        if(idx !== -1){
+            return Promise.resolve(citiesCache[key].data[idx])
+        }
+    }
+
+    try{
+        const city = await axios.get(`http://dataservice.accuweather.com/locations/v1/${cityKey}?apikey=${apiKey}`)
+        console.log('%c Got City from API ', 'background: #222; color: #bada55');
+        return city
+    } catch(err){
+        console.log('%c Failed to get City from API ', 'background: #222; color: #ff0000');
+    }
 }
 
 function toggleCityFavorite(city: ICityProps){
