@@ -5,14 +5,22 @@ interface ICitiesProps {
     cities: ICityProps[]
     setCurrentCity: React.Dispatch<React.SetStateAction<ICityProps | null>>;
     toggleMobileMenu: (action: boolean) => void;
+    clearSearch: () => void;
 }
 
-export const SearchResults = ({ cities, setCurrentCity, toggleMobileMenu }: ICitiesProps) => {
+export const SearchResults = ({ cities, setCurrentCity, toggleMobileMenu, clearSearch }: ICitiesProps) => {
+
+    const onCityClick = (city: ICityProps) => {
+        setCurrentCity(city)
+        toggleMobileMenu(false)
+        clearSearch()
+    }
+    
     return (
         <div className={`cities-list ${(cities && cities.length > 0) ? 'show' : ''}`}>
             <ul>
                 {(cities && cities.length > 0) && cities.map(city => {
-                    return <li onClick={() => {setCurrentCity(city); toggleMobileMenu(false)}} key={`item-${city.Key}`} className="city-item">{city.City}, {city.Country}</li>
+                    return <li onClick={() => {onCityClick(city)}} key={`item-${city.Key}`} className="city-item">{city.City}, {city.Country}</li>
                 })}
             </ul>
         </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { CitySearch } from '../components/CitySearch'
 import { FiveDayForecast } from '../components/FiveDayForecast'
 import { Header } from '../components/Header'
@@ -66,13 +66,13 @@ export interface IForecastProps {
 
 export const WeatherApp = () => {
 
-    const [cities, setCities] = useState([])
+    const [cities, setCities] = useState<ICityProps[]>([])
     const [currentCity, setCurrentCity] = useState<ICityProps | null>(null)
     const [todayWeather, setTodayWeather] = useState<any>(null)
     const [isMobileMenu, setMobileMenu] = useState(false)
+    const inputRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
-
       // Get user's current location (lat,lng) => get user's current city by Api
       // If device/browser doesn't support geolocation, get default location (tel aviv)
       const getUserCoords = () => {
@@ -108,25 +108,31 @@ export const WeatherApp = () => {
         setMobileMenu(action)
     }
 
+    const clearSearch = () => {
+      setCities([])
+      if(inputRef.current){
+        inputRef.current.value = ''
+      }
+    }
+
     return (
         <>
         <div className="app">
             <TodayWeatherContext.Provider value={{todayWeather, setTodayWeather, currentCity}}>
-
-            <div className="main-app">
-                <Header isMobileMenu={isMobileMenu} toggleMobileMenu={toggleMobileMenu}/>
-                <div className="weather-details-zone">
-                    <TodayWeather city={currentCity} />
-                    <FiveDayForecast city={currentCity}  />
-                </div>
-            </div>
-            <div className={`search-details-zone ${isMobileMenu ? 'show-menu' : ''}`}>
-                <CitySearch onSetCitySearch={onSetCitySearch}/>
-                <SearchResults cities={cities} setCurrentCity={setCurrentCity} toggleMobileMenu={toggleMobileMenu}/>
-            </div>
+              <div className="main-app">
+                  <Header isMobileMenu={isMobileMenu} toggleMobileMenu={toggleMobileMenu}/>
+                  <div className="weather-details-zone">
+                      <TodayWeather city={currentCity} />
+                      <FiveDayForecast city={currentCity}  />
+                  </div>
+              </div>
+              <div className={`search-details-zone ${isMobileMenu ? 'show-menu' : ''}`}>
+                  <CitySearch inputRef={inputRef} onSetCitySearch={onSetCitySearch}/>
+                  <SearchResults cities={cities} setCurrentCity={setCurrentCity} toggleMobileMenu={toggleMobileMenu} clearSearch={clearSearch}/>
+              </div>
             </TodayWeatherContext.Provider>
-            </div>
-        <Screen isOpen={isMobileMenu} exitScreen={toggleMobileMenu}/>
+          </div>
+          <Screen isOpen={isMobileMenu} exitScreen={toggleMobileMenu}/>
         </>
     )
 }

@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { RefObject } from 'react'
 import { utilService } from '../services/util.service'
 
 
 interface IProps {
     onSetCitySearch: (searchTxt: string) => void;
+    inputRef: RefObject<HTMLInputElement>;
 }
 
-export const CitySearch: React.FC<IProps> = ({onSetCitySearch}) => {
+export const CitySearch = ({onSetCitySearch, inputRef}: IProps) => {
 
     const debounceTxt = (txt: string) => {
         onSetCitySearch(txt)
@@ -21,7 +22,7 @@ export const CitySearch: React.FC<IProps> = ({onSetCitySearch}) => {
 
     return (
         <div className="city-search">
-            <input className="city-input" type="text" placeholder="Search" onChange={onInput}/>
+            <input ref={inputRef} className="city-input" type="text" placeholder="Search" onChange={onInput}/>
         </div>
     )
 }
