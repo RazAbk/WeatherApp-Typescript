@@ -14,12 +14,17 @@ export const Favourites = () => {
         setFavoriteCities(favoriteCities)
     }, [])
     
+    const removeFromFavorites = (city: ICityProps) => {
+        const updatedFavoriteCities = cityService.toggleCityFavorite(city)
+        setFavoriteCities(updatedFavoriteCities)
+    }
+    
     return (
         <div className="app">
             <div className="main-app">
                 <FavoritesHeader/>
                 <div className="favorite-cities-list">
-                    {favoriteCities.map(city => <FavoriteCityPreview key={'favorite-' + city.Key} city={city}/>)}
+                    {favoriteCities.map(city => <FavoriteCityPreview key={'favorite-' + city.Key} city={city} removeFromFavorites={removeFromFavorites}/>)}
                 </div>
             </div>
         </div>

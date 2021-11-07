@@ -106,7 +106,7 @@ async function getCityByGeolocation({lat, lng}: ICoords = {lat: -1, lng: -1}): P
 }
 
 function toggleCityFavorite(city: ICityProps){
-    const favoriteCities: LooseObject = localStorageService.load(favoriteCitiesKey) || []
+    const favoriteCities: ICityProps[] = localStorageService.load(favoriteCitiesKey) || []
     
     const idx = favoriteCities.findIndex((favCity: ICityProps): boolean => favCity.Key === city.Key)
     
@@ -117,6 +117,7 @@ function toggleCityFavorite(city: ICityProps){
     }
     
     localStorageService.save(favoriteCitiesKey, favoriteCities)
+    return favoriteCities
   }
   
   function isCityFavorite(cityKey: string) {
