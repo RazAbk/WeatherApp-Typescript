@@ -9,6 +9,10 @@
 
     @include for-tablet{
         font-size: 1rem;
+
+        .header-favorite-sate{
+            font-size: 2rem;
+        }
     }
 
     .header-routing{

@@ -1,13 +1,15 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { ICityProps } from '../pages/WeatherApp'
 import { utilService } from '../services/util.service'
 import { weatherService } from '../services/weather-service'
 import { TodayWeatherContext, IWeatherContext } from './context/TodayWeatherContext'
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 
 
 export const TodayWeather = ({ city }: { city: ICityProps | null }) => {
 
     const { todayWeather, setTodayWeather } = useContext<IWeatherContext>(TodayWeatherContext)
+    const [ isFavorite, setFavorite ] = useState(false)
 
     useEffect(() => {
         const getCurrentWeather = async (cityKey: string) => {
@@ -16,9 +18,16 @@ export const TodayWeather = ({ city }: { city: ICityProps | null }) => {
         }
         if (city) {
             getCurrentWeather(city.Key)
+            setFavorite(weatherService.isCityFavorite(city.Key))
         }
     }, [city, setTodayWeather])
 
+    const onToggleFavorite = () => {
+        if(city){
+            weatherService.toggleCityFavorite(city.Key)
+            setFavorite(prevState => !prevState)
+        }
+    }
 
     console.log('currentWeather from context', todayWeather)
 
@@ -27,6 +36,13 @@ export const TodayWeather = ({ city }: { city: ICityProps | null }) => {
 
     return (
         <div className="todays-weather">
+            <div className="city-favorite-state">
+                {isFavorite ? 
+                    <AiFillHeart onClick={onToggleFavorite}/>
+                :
+                    <AiOutlineHeart onClick={onToggleFavorite}/>
+                }
+            </div>
             <div className="temp-display">
                 {todayWeather.Temperature.Metric.Value.toFixed(0)}°
             </div>

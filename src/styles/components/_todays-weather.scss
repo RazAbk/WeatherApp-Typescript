@@ -1,14 +1,56 @@
 .todays-weather{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.80);
+    border-radius: 20px;
+    padding: 1rem;
 
+    display: grid;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-around;
+
+    grid-template-columns: 2;
+    grid-template-rows: 2;
+    
+    grid-template-areas: 
+    "city-and-time city-and-time"
+    "temp-display weather-preview";
+
+    width: 90%;
+    
     .temp-display{
-        font-size: 5rem;
+        grid-area: temp-display;
+        font-size: 3rem;
     }
 
+    .city-favorite-state{
+     position: absolute;
+     top: 10%;
+     right: 5%;
+     font-size: 1.5rem;
+    }
+    
+    @include for-tablet{
+        background-color: initial;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        width: unset;
+    
+        .temp-display{
+            font-size: 5rem;
+        }
+
+        .city-favorite-state{
+           display: none;
+        }
+           
+    }
+
+
     .city-and-time{
+        grid-area: city-and-time;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -32,6 +74,7 @@
     }
 
     .weather-preview{
+        grid-area: weather-preview;
         display: flex;
         flex-direction: column;
         align-items: center;

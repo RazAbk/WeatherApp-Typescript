@@ -4,7 +4,7 @@ import { FiveDayForecast } from '../components/FiveDayForecast'
 import { Header } from '../components/Header'
 import { SearchResults } from '../components/SearchResults'
 import { TodayWeather } from '../components/TodayWeather'
-import { WeatherDetails } from '../components/WeatherDetails'
+// import { WeatherDetails } from '../components/WeatherDetails'
 import { cityService } from '../services/city-service'
 import { TodayWeatherContext } from '../components/context/TodayWeatherContext'
 import { Screen } from '../components/Screen'
@@ -88,7 +88,7 @@ export const WeatherApp = () => {
     return (
         <>
         <div className="app">
-            <TodayWeatherContext.Provider value={{todayWeather, setTodayWeather}}>
+            <TodayWeatherContext.Provider value={{todayWeather, setTodayWeather, currentCity}}>
 
             <div className="main-app">
                 <Header isMobileMenu={isMobileMenu} toggleMobileMenu={toggleMobileMenu}/>

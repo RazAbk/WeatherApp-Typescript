@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { GiHamburgerMenu } from 'react-icons/gi'
-import { AiFillHeart } from 'react-icons/ai'
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import { FaHome } from 'react-icons/fa'
+import { IWeatherContext, TodayWeatherContext } from './context/TodayWeatherContext'
+import { weatherService } from '../services/weather-service'
+
 
 interface IHeaderProps {
     isMobileMenu: boolean;
@@ -11,6 +14,8 @@ interface IHeaderProps {
 export const Header = ({isMobileMenu, toggleMobileMenu}: IHeaderProps) => {
 
     const [isMobile, setIsMobile] = useState(window.innerWidth < 850 ? true : false)
+    const { currentCity } = useContext<IWeatherContext>(TodayWeatherContext)
+    const [isFavorite, setFavorite] = useState(false)
 
     const updateState = () => {
         const windowWidth = window.innerWidth
@@ -25,19 +30,22 @@ export const Header = ({isMobileMenu, toggleMobileMenu}: IHeaderProps) => {
     useEffect(() => {
         window.addEventListener('resize', updateState)
 
+        if(currentCity){
+            setFavorite(weatherService.isCityFavorite(currentCity.Key))
+        }
+
         return () => {
             window.removeEventListener('resize', updateState)
         }
-    }, [])
+    }, [currentCity])
 
-    const style = {
-        show: {
-            display: 'initial'
-        },
-        dontShow: {
-            display: 'none'
+    const onToggleFavorite = () => {
+        if(currentCity){
+            weatherService.toggleCityFavorite(currentCity.Key)
+            setFavorite(prevState => !prevState)
         }
     }
+
 
     return (
         <div className="header">
@@ -54,9 +62,13 @@ export const Header = ({isMobileMenu, toggleMobileMenu}: IHeaderProps) => {
                 </>
                 }
             </div>
-            <div className="header-menu" style={isMobile ? style.show : style.dontShow}>
+            {isMobile ? 
                 <GiHamburgerMenu className="mobile-hamburger-btn" onClick={() => {toggleMobileMenu(!isMobileMenu)}} />
-            </div>
+            :
+                <div className="header-favorite-sate">
+                    {isFavorite ? <AiFillHeart onClick={onToggleFavorite}/> : <AiOutlineHeart onClick={onToggleFavorite}/>}
+                </div>
+            }
         </div>
     )
 }
