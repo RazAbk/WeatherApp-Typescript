@@ -7,6 +7,7 @@ import { TodayWeather } from '../components/TodayWeather'
 import { WeatherDetails } from '../components/WeatherDetails'
 import { cityService } from '../services/city-service'
 import { TodayWeatherContext } from '../components/context/TodayWeatherContext'
+import { Screen } from '../components/Screen'
 
 export interface ICityProps {
     Key: string;
@@ -68,8 +69,8 @@ export const WeatherApp = () => {
 
     const [cities, setCities] = useState([])
     const [currentCity, setCurrentCity] = useState<ICityProps | null>(null)
-
     const [todayWeather, setTodayWeather] = useState<any>(null)
+    const [isMobileMenu, setMobileMenu] = useState(false)
 
     const getCities = async (searchTxt: string) => {
         const cities = await cityService.getCitiesNames(searchTxt)
@@ -80,23 +81,30 @@ export const WeatherApp = () => {
         getCities(searchTxt)
     }
 
+    const toggleMobileMenu = () => {
+        setMobileMenu(prevState => !prevState)
+    }
+
     return (
+        <>
         <div className="app">
             <TodayWeatherContext.Provider value={{todayWeather, setTodayWeather}}>
 
             <div className="main-app">
-                <Header />
+                <Header toggleMobileMenu={toggleMobileMenu}/>
                 <div className="weather-details-zone">
                     <TodayWeather city={currentCity} />
                     <FiveDayForecast city={currentCity}  />
                 </div>
             </div>
-            <div className="search-details-zone">
+            <div className={`search-details-zone ${isMobileMenu ? 'show-menu' : ''}`}>
                 <CitySearch onSetCitySearch={onSetCitySearch}/>
-                <SearchResults cities={cities} setCurrentCity={setCurrentCity}/>
+                <SearchResults cities={cities} setCurrentCity={setCurrentCity} toggleMobileMenu={toggleMobileMenu}/>
                 {/* <WeatherDetails /> */}
             </div>
             </TodayWeatherContext.Provider>
         </div>
+        <Screen isOpen={isMobileMenu} exitScreen={toggleMobileMenu}/>
+        </>
     )
 }

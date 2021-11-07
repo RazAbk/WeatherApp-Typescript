@@ -1,7 +1,22 @@
 .header{
     display: flex;
-    gap: 1rem;
-
+    justify-content: space-between;
+    align-items: center;
+    color:white;
     padding: 2rem;
-    color:white
+
+    font-size: 1.75rem;
+
+    @include for-tablet{
+        font-size: 1rem;
+    }
+
+    .header-routing{
+        display: flex;
+        gap: 1rem;
+    }
+
+    &>*{
+        cursor: pointer;
+    }
 }
