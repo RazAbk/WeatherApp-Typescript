@@ -36,7 +36,6 @@ async function getCitiesNames(searchTxt: string) {
 
     // Fetch Cities from cache (If exist)
     if (citiesCache[searchTxt]) {
-        // Todo: Add cache timing mechanism
         console.log('%c Got cities from Cache ', 'background: #222; color: #bada55');
         return citiesCache[searchTxt].data
     }
@@ -82,21 +81,22 @@ async function getCityByGeolocation({lat, lng}: ICoords = {lat: -1, lng: -1}): P
             })
         }
 
-        // const city = await axios.get(`http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${apiKey}&q=${lat}%2C%20${lng}`)
+        const city = await axios.get(`http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${apiKey}&q=${lat}%2C%20${lng}`)
 
-        // console.log('%c Got City from API ', 'background: #222; color: #bada55');
-        // return {
-        //     Key: city.data.Key,
-        //     City: city.data.LocalizedName,
-        //     Country: city.data.Country.LocalizedName
-        // }
+        console.log('%c Got City from API ', 'background: #222; color: #bada55');
+        return {
+            Key: city.data.Key,
+            City: city.data.LocalizedName,
+            Country: city.data.Country.LocalizedName
+        }
 
-
-        return Promise.resolve({
-            Key: "215854",
-            City: "Tel Aviv",
-            Country: "Israel"
-        })
+        // Dev only:
+        
+        // return Promise.resolve({
+        //     Key: "215854",
+        //     City: "Tel Aviv",
+        //     Country: "Israel"
+        // })
 
     } catch(err) {
         console.log('%c Failed to get City from API ', 'background: #222; color: #ff0000');
