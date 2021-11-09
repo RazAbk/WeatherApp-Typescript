@@ -41,7 +41,7 @@ async function getCitiesNames(searchTxt: string) {
 
     // Fetch Cities from API
     try {
-        const cities = await axios.get(`http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${apiKey}&q=${searchTxt}`)
+        const cities = await axios.get(`https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${apiKey}&q=${searchTxt}`)
         const citiesMapObj = cities.data.map((city: ICity) => {
             return {
                 Key: city.Key,
@@ -80,7 +80,7 @@ async function getCityByGeolocation({lat, lng}: ICoords = {lat: -1, lng: -1}): P
             })
         }
 
-        const city = await axios.get(`http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${apiKey}&q=${lat}%2C%20${lng}`)
+        const city = await axios.get(`https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${apiKey}&q=${lat}%2C%20${lng}`)
 
         console.log('%c Got City from API ', 'background: #222; color: #bada55');
         return {
@@ -120,7 +120,7 @@ async function getCityByKey(cityKey: string){
     }
 
     try{
-        const city = await axios.get(`http://dataservice.accuweather.com/locations/v1/${cityKey}?apikey=${apiKey}`)
+        const city = await axios.get(`https://dataservice.accuweather.com/locations/v1/${cityKey}?apikey=${apiKey}`)
         console.log('%c Got City from API ', 'background: #222; color: #bada55');
         return city
     } catch(err){

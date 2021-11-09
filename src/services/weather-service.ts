@@ -39,7 +39,7 @@ async function getCurrentWeather(cityKey: string) {
 
     // Fetch Weather from API
     try {
-        const currentWeather = await axios.get(`http://dataservice.accuweather.com/currentconditions/v1/${cityKey}?apikey=${apiKey}`)
+        const currentWeather = await axios.get(`https://dataservice.accuweather.com/currentconditions/v1/${cityKey}?apikey=${apiKey}`)
         const weatherObj = currentWeather.data[0]
 
         currentWeatherCache[cityKey] = {
@@ -68,7 +68,7 @@ async function getFiveDayForecast(cityKey: string) {
     
     // Fetch Forecast from API
     try{
-        const foreCast = await axios.get(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityKey}?apikey=${apiKey}&metric=${true}`)
+        const foreCast = await axios.get(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityKey}?apikey=${apiKey}&metric=${true}`)
         const foreCastObj = foreCast.data.DailyForecasts
 
         forecastCache[cityKey] = {
