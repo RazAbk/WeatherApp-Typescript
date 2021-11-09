@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/WeatherApp-Typescript/static/css/main.bb00e050.chunk.css",
+    "main.js": "/WeatherApp-Typescript/static/js/main.70b6ddd2.chunk.js",
+    "main.js.map": "/WeatherApp-Typescript/static/js/main.70b6ddd2.chunk.js.map",
+    "runtime-main.js": "/WeatherApp-Typescript/static/js/runtime-main.5614bb7a.js",
+    "runtime-main.js.map": "/WeatherApp-Typescript/static/js/runtime-main.5614bb7a.js.map",
+    "static/js/2.45c87c80.chunk.js": "/WeatherApp-Typescript/static/js/2.45c87c80.chunk.js",
+    "static/js/2.45c87c80.chunk.js.map": "/WeatherApp-Typescript/static/js/2.45c87c80.chunk.js.map",
+    "index.html": "/WeatherApp-Typescript/index.html",
+    "static/css/main.bb00e050.chunk.css.map": "/WeatherApp-Typescript/static/css/main.bb00e050.chunk.css.map",
+    "static/js/2.45c87c80.chunk.js.LICENSE.txt": "/WeatherApp-Typescript/static/js/2.45c87c80.chunk.js.LICENSE.txt",
+    "static/media/style.scss": "/WeatherApp-Typescript/static/media/Roboto-Regular.a8d6ac03.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5614bb7a.js",
+    "static/js/2.45c87c80.chunk.js",
+    "static/css/main.bb00e050.chunk.css",
+    "static/js/main.70b6ddd2.chunk.js"
+  ]
+}
