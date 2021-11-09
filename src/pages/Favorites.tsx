@@ -5,7 +5,7 @@ import { FavoritesHeader } from '../components/FavoritesHeader'
 import { cityService } from '../services/city-service'
 
 
-export const Favourites = () => {
+export const Favorites = () => {
 
     const [favoriteCities, setFavoriteCities] = useState<ICityProps[]>([])
 

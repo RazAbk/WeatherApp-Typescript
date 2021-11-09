@@ -1,4 +1,5 @@
 import axios from "axios"
+import { ICurrentWeatherProps, IForecastProps } from "../pages/WeatherApp"
 import { localStorageService } from "./local-storage.service"
 
 export const weatherService = {
@@ -6,8 +7,18 @@ export const weatherService = {
     getFiveDayForecast
 }
 
-interface LooseObject {
-    [key: string]: any
+interface IWeather {
+    [key: string]:{
+        createdAt: number,
+        data: ICurrentWeatherProps
+    }
+}
+
+interface IForecase {
+    [key: string]: {
+        createdAt: number,
+        data: IForecastProps
+    }
 }
 
 
@@ -17,10 +28,10 @@ const forecastKey = 'foreCast'
 
 
 async function getCurrentWeather(cityKey: string) {
-    const currentWeatherCache: LooseObject = localStorageService.load(currentWeatherKey) || {}
+    const currentWeatherCache: IWeather = localStorageService.load(currentWeatherKey) || {}
     // Fetch Weather from cache (If exist)
     if (currentWeatherCache[cityKey]) {
-        if(currentWeatherCache[cityKey].createdAt < 1000 * 60 * 30){
+        if(Date.now() -  currentWeatherCache[cityKey].createdAt < 1000 * 60 * 30){
             console.log('%c Got Weather from Cache ', 'background: #222; color: #bada55');
             return currentWeatherCache[cityKey].data
         }
@@ -46,10 +57,10 @@ async function getCurrentWeather(cityKey: string) {
 }
 
 async function getFiveDayForecast(cityKey: string) {
-    const forecastCache: LooseObject = localStorageService.load(forecastKey) || []
+    const forecastCache: IForecase = localStorageService.load(forecastKey) || []
     // Fetch Forecast from cache (If exist)
     if(forecastCache[cityKey]){
-        if(forecastCache[cityKey].createdAt < 1000 * 60 * 30){
+        if(Date.now() - forecastCache[cityKey].createdAt < 1000 * 60 * 30){
             console.log('%c Got Forecast from Cache ', 'background: #222; color: #bada55');
             return forecastCache[cityKey].data
         }

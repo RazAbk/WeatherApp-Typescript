@@ -1,18 +1,18 @@
 import React from 'react'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import { Route, Switch } from 'react-router'
-import { Favourites } from './pages/Favourites';
+import { Favorites } from './pages/Favorites';
 import { WeatherApp } from './pages/WeatherApp';
 
 function App() {
   return (
-    <Router>
+    <HashRouter>
       <Switch>
-        <Route exact path = '/favorites' component={Favourites}/>
+        <Route exact path = '/favorites' component={Favorites}/>
         <Route path = '/city/:citykey' component={WeatherApp}/>
         <Route exact path = '/' component={WeatherApp}/>
       </Switch>
-    </Router>
+    </HashRouter>
   );
 }
 

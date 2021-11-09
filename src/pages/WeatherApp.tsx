@@ -74,7 +74,7 @@ export const WeatherApp = () => {
 
     const [cities, setCities] = useState<ICityProps[]>([])
     const [currentCity, setCurrentCity] = useState<ICityProps | null>(null)
-    const [todayWeather, setTodayWeather] = useState<any>(null)
+    const [todayWeather, setTodayWeather] = useState<ICurrentWeatherProps | null>(null)
     const [isMobileMenu, setMobileMenu] = useState(false)
     const inputRef = useRef<HTMLInputElement>(null)
     const cityKey: ICityKeyParams = useParams()
@@ -88,7 +88,7 @@ export const WeatherApp = () => {
             lat: geoLocation.coords.latitude,
             lng: geoLocation.coords.longitude
           }
-          
+
           const city = await cityService.getCityByGeolocation(userCoords)
           setCurrentCity(city)
         }, async () => {
@@ -103,7 +103,7 @@ export const WeatherApp = () => {
         setCurrentCity(currentCity)
       }
       
-      if(!cityKey){
+      if(!cityKey || Object.keys(cityKey).length === 0){
         getUserCoords()
       } else{
         getCurrentWeather()
