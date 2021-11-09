@@ -19,7 +19,6 @@ export const CitySearch = ({onSetCitySearch, inputRef}: IProps) => {
         onDebounce(event.target.value)
     }
 
-
     return (
         <div className="city-search">
             <input ref={inputRef} className="city-input" type="text" placeholder="Search" onChange={onInput}/>
