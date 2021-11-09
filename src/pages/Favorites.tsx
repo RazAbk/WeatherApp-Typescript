@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ICityProps } from '../components/context/TodayWeatherContext'
+import { ICityProps } from '../interfaces/ICity'
 import { FavoriteCityPreview } from '../components/FavoriteCityPreview'
 import { FavoritesHeader } from '../components/FavoritesHeader'
 import { cityService } from '../services/city-service'

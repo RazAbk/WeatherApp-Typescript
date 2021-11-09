@@ -1,5 +1,5 @@
 import React from 'react'
-import { ICityProps } from '../pages/WeatherApp'
+import { ICityProps } from '../interfaces/ICity'
 
 interface ICitiesProps {
     cities: ICityProps[]

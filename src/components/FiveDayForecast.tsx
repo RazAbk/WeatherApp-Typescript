@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { ICityProps } from '../pages/WeatherApp'
+import { ICityProps } from '../interfaces/ICity'
 import { weatherService } from '../services/weather-service'
-import { IForecastProps } from '../pages/WeatherApp'
+import { IForecastProps } from '../interfaces/IWeather'
 import { utilService } from '../services/util.service'
 import { IWeatherContext, TodayWeatherContext } from '../components/context/TodayWeatherContext'
 

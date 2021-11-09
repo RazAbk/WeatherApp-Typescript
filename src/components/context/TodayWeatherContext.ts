@@ -1,13 +1,8 @@
 import { createContext } from "react";
-import { ICurrentWeatherProps } from "../../pages/WeatherApp";
+import { ICityProps } from "../../interfaces/ICity";
+import { ICurrentWeatherProps } from "../../interfaces/IWeather";
 
 export const TodayWeatherContext = createContext<any>(null);
-
-export interface ICityProps {
-    Key: string;
-    City: string;
-    Country: string;
-}
 
 export interface IWeatherContext {
     todayWeather: ICurrentWeatherProps

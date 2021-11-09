@@ -1,5 +1,5 @@
 import axios from "axios"
-import { ICurrentWeatherProps, IForecastProps } from "../pages/WeatherApp"
+import { ICurrentWeatherProps, IForecastProps } from "../interfaces/IWeather"
 import { localStorageService } from "./local-storage.service"
 
 export const weatherService = {

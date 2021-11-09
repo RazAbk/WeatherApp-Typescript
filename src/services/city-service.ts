@@ -1,5 +1,5 @@
 import axios from "axios"
-import { ICityProps } from "../components/context/TodayWeatherContext" 
+import { ICityProps } from '../interfaces/ICity' 
 import { localStorageService } from "./local-storage.service"
 
 export const cityService = {
@@ -25,7 +25,6 @@ interface ICityCache {
         data: ICity[]
     }
 }
-
 
 const apiKey = process.env.REACT_APP_WEATHER_API
 const citiesKey = 'cities'
@@ -91,7 +90,7 @@ async function getCityByGeolocation({lat, lng}: ICoords = {lat: -1, lng: -1}): P
         }
 
         // Dev only:
-        
+
         // return Promise.resolve({
         //     Key: "215854",
         //     City: "Tel Aviv",
