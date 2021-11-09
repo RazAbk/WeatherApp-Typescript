@@ -30,9 +30,6 @@ export const TodayWeather = ({ city }: { city: ICityProps | null }) => {
         }
     }
 
-    console.log('currentWeather from context', todayWeather)
-
-
     if (!city || !todayWeather) return null
 
     return (

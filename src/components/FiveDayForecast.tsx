@@ -13,7 +13,6 @@ export const FiveDayForecast = ({city}: { city: ICityProps | null }) => {
     useEffect(() => {
         const getForeCast = async (cityKey: string) => {
             const foreCast: IForecastProps[] = await weatherService.getFiveDayForecast(cityKey)
-            console.log('foreCast', foreCast)
             setForecast(foreCast)
         }
 

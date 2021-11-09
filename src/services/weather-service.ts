@@ -32,7 +32,6 @@ async function getCurrentWeather(cityKey: string) {
     // Fetch Weather from cache (If exist)
     if (currentWeatherCache[cityKey]) {
         if(Date.now() -  currentWeatherCache[cityKey].createdAt < 1000 * 60 * 30){
-            console.log('%c Got Weather from Cache ', 'background: #222; color: #bada55');
             return currentWeatherCache[cityKey].data
         }
     }
@@ -49,10 +48,8 @@ async function getCurrentWeather(cityKey: string) {
 
         localStorageService.save(currentWeatherKey, currentWeatherCache)
 
-        console.log('%c Got Weather from API ', 'background: #222; color: #bada55');
         return weatherObj
     } catch (err) {
-        console.log('%c Failed to get Weather from API ', 'background: #222; color: #ff0000');
     }
 }
 
@@ -61,7 +58,6 @@ async function getFiveDayForecast(cityKey: string) {
     // Fetch Forecast from cache (If exist)
     if(forecastCache[cityKey]){
         if(Date.now() - forecastCache[cityKey].createdAt < 1000 * 60 * 30){
-            console.log('%c Got Forecast from Cache ', 'background: #222; color: #bada55');
             return forecastCache[cityKey].data
         }
     }
@@ -78,10 +74,8 @@ async function getFiveDayForecast(cityKey: string) {
 
         localStorageService.save(forecastKey, forecastCache)
 
-        console.log('%c Got Forecast from API ', 'background: #222; color: #bada55');
         return foreCastObj
 
     } catch(err){
-        console.log('%c Failed to get Forecast from API ', 'background: #222; color: #ff0000');
     }
 }

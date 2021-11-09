@@ -35,7 +35,6 @@ async function getCitiesNames(searchTxt: string) {
 
     // Fetch Cities from cache (If exist)
     if (citiesCache[searchTxt]) {
-        console.log('%c Got cities from Cache ', 'background: #222; color: #bada55');
         return citiesCache[searchTxt].data
     }
 
@@ -57,10 +56,8 @@ async function getCitiesNames(searchTxt: string) {
         
         localStorageService.save(citiesKey, citiesCache)
         
-        console.log('%c Got cities from API ', 'background: #222; color: #bada55');
         return citiesMapObj
     } catch(err) {
-        console.log('%c Failed to get Cities from API ', 'background: #222; color: #ff0000');
     }
 }
 
@@ -82,7 +79,6 @@ async function getCityByGeolocation({lat, lng}: ICoords = {lat: -1, lng: -1}): P
 
         const city = await axios.get(`https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${apiKey}&q=${lat}%2C%20${lng}`)
 
-        console.log('%c Got City from API ', 'background: #222; color: #bada55');
         return {
             Key: city.data.Key,
             City: city.data.LocalizedName,
@@ -98,7 +94,6 @@ async function getCityByGeolocation({lat, lng}: ICoords = {lat: -1, lng: -1}): P
         // })
 
     } catch(err) {
-        console.log('%c Failed to get City from API ', 'background: #222; color: #ff0000');
         return Promise.resolve({
             Key: "215854",
             City: "Tel Aviv",
@@ -121,10 +116,8 @@ async function getCityByKey(cityKey: string){
 
     try{
         const city = await axios.get(`https://dataservice.accuweather.com/locations/v1/${cityKey}?apikey=${apiKey}`)
-        console.log('%c Got City from API ', 'background: #222; color: #bada55');
         return city
     } catch(err){
-        console.log('%c Failed to get City from API ', 'background: #222; color: #ff0000');
     }
 }
 
